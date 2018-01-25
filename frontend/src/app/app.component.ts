@@ -12,7 +12,7 @@ export class AppComponent {
   title = 'app';
   url : string = 'http://localhost:8000/travel/users';
   
-    constructor(private http : HttpClient){}
+  constructor(private http : HttpClient){}
   
   public getUsers() {
     this.http.get(this.url).subscribe((res)=>{
