@@ -1,0 +1,10 @@
+<div>
+  <div class="form-group">
+    <input type="text" placeholder="Location" 
+           autocorrect="off" autocapitalize="off"
+           spellcheck="off" class="form-control" #search>
+  </div>
+  <agm-map [latitude]="latitude" [longitude]="longitude">
+    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+  </agm-map>
+</div>

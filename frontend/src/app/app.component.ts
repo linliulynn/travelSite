@@ -10,9 +10,9 @@ import 'rxjs/add/operator/toPromise';
 })
 export class AppComponent {
   title = 'app';
-  url : string = 'http://localhost:8000/travel/users';
+  url : string = 'http://localhost:8000/travel/users.json';
   
-    constructor(private http : HttpClient){}
+  constructor(private http : HttpClient){}
   
   public getUsers() {
     this.http.get(this.url).subscribe((res)=>{
