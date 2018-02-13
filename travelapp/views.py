@@ -8,22 +8,10 @@ from rest_framework.decorators import detail_route
 from django.contrib.auth.models import User 
 from django.contrib.auth import authenticate, login
 from .serializers import *
+from .models import *
 
 def index(request):
     return HttpResponse("hello travelapp")
-
-# class UserViewSet(viewsets.ModelViewSet):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-
-    # @detail_route(methods=['post'])
-    # def sign_in(self, request, pk=None):
-    #     user = UserSerializer(data=request.data)
-    #     if (user in User.objects.all()):
-    #         return Response({'status': 'user find'})
-    #     else:
-    #         return Response(user.errors,
-    #                         status=status.HTTP_400_BAD_REQUEST)
 
 class UserList(generics.ListCreateAPIView):
     queryset=User.objects.all()   
@@ -59,3 +47,7 @@ class LoginView(generics.GenericAPIView):
                 'status': 'Unauthorized',
                 'message': 'Username/password combination invalid.'
             }, status=status.HTTP_401_UNAUTHORIZED)
+
+class JourneyList(generics.ListCreateAPIView):
+    queryset = Journey.objects.all()
+    serializer_class = JourneySerializer

@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from .models import *
 from rest_framework import serializers
 import json
 
@@ -15,4 +16,9 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+
+class JourneySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Journey
+        fields = '__all__'
 
