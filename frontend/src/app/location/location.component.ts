@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, NgZone, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, NgZone, ViewChild, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
@@ -12,6 +12,8 @@ export class LocationComponent implements OnInit {
   public latitude: number;
   public longitude: number;
   public searchControl: FormControl;
+
+  @Output() onChangeLocation = new EventEmitter();
 
   @ViewChild("search")
   public searchElementRef: ElementRef;
@@ -47,10 +49,12 @@ export class LocationComponent implements OnInit {
           }
 
           //set latitude, longitude
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
-
+          this.latitude = Number(place.geometry.location.lat().toFixed(6));
+          this.longitude = Number(place.geometry.location.lng().toFixed(6));
+          
           console.log(this.latitude, this.longitude);
+
+          this.onChangeLocation.emit();         
         });
       });
     });
