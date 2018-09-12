@@ -12,8 +12,8 @@ import { Journey } from '../models/journey';
 })
 export class AddJourneyComponent implements AfterViewInit {
   addjourneyForm: FormGroup;
-  loading: boolean=false;
-  image: string='';
+  loading = false;
+  image: '';
   latitude: number;
   longitude: number;
   journey: Journey;
@@ -42,36 +42,36 @@ export class AddJourneyComponent implements AfterViewInit {
   }
 
   onFileChange(event) {
-    let reader=new FileReader();
-    if(event.target.files && event.target.files.length > 0) {   
+    let reader = new FileReader();
+    if (event.target.files && event.target.files.length > 0) {
       let file = event.target.files[0];
-      reader.readAsDataURL(file);    
+      reader.readAsDataURL(file);
       reader.onload = () => {
         this.addjourneyForm.get('journeyimg').setValue({
           filename: file.name,
           filetype: file.type,
-          value: reader.result   
-        })
-        this.image = reader.result
-        this.journey.journey = this.image
+          value: reader.result
+        });
+        this.image = reader.result;
+        this.journey.journey = this.image;
       };
     }
   }
 
   clearFile() {
     this.addjourneyForm.get('journeyimg').setValue(null);
-    this.image ='';
-    this.fileInput.nativeElement.value='';
+    this.image = '';
+    this.fileInput.nativeElement.value = '';
   }
 
   onChangeLocation() {
     this.journey.latitude = this.locationComponent.latitude;
     this.journey.longitude = this.locationComponent.longitude;
-    console.log(this.journey.latitude, this.journey.longitude); 
+    console.log(this.journey.latitude, this.journey.longitude);
   }
 
-  onSubmit() { 
-    const owner = JSON.parse(localStorage.getItem("currentUser"));
+  onSubmit() {
+    const owner = JSON.parse(localStorage.getItem('currentUser'));
     console.log(owner.id);
     this.loading = true;
     console.log(this.journey.latitude, this.journey.longitude); 

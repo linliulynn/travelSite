@@ -4,21 +4,21 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AddJourneyService {
   private header = new HttpHeaders().set('Content-Type', 'application/json');
-  private addJourneyUrl : string = 'http://localhost:8000/travel/journeys/';
+  private addJourneyUrl = 'http://localhost:8000/travel/journeys/';
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  addJourney(journey,owner) {
-    console.log("here");
-    let body = JSON.stringify({
+  addJourney(journey, owner) {
+    console.log('here');
+    const body = JSON.stringify({
       journey_img: journey.journey,
       latitude: journey.latitude,
       longitude: journey.longitude,
-      description: "first",
+      description: 'first',
       owner: owner
     });
-    console.log(body); 
+    console.log(body);
     return this.http
-           .post(this.addJourneyUrl, body, {headers: this.header,}); 
+           .post(this.addJourneyUrl, body, {headers: this.header, } );
   }
 }

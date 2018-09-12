@@ -1,5 +1,6 @@
 <div class="container">
-  <form (keydown.enter)="handleEnterKeyPress($event)" [formGroup]="addjourneyForm" (ngSubmit)="onSubmit(addjourneyForm)">
+  <form (keydown.enter)="handleEnterKeyPress($event)" [formGroup]="addjourneyForm" 
+    (ngSubmit)="onSubmit(addjourneyForm)">
     <div class="form-group">
       <label for="journeyimg">journey image</label>
       <input type="file" id="journeyimg" (change)="onFileChange($event)" #fileInput>

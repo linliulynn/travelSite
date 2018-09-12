@@ -1,5 +1,4 @@
 export class Journey {
-    
   constructor(
   public journey: string|any,
   public latitude: number,

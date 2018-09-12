@@ -18,7 +18,7 @@ import { JourneyComponent } from './journey/journey.component';
 
 const appRoutes: Routes = [
   {path: '', component: AppComponent}
-]
+];
 
 @NgModule({
   declarations: [
@@ -32,8 +32,8 @@ const appRoutes: Routes = [
   ],
   imports: [
     AgmCoreModule.forRoot({
-      apiKey: "",
-      libraries: ["places"]
+      apiKey: '',
+      libraries: ['places']
     }),
     BrowserModule,
     HttpClientModule,
