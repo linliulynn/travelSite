@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {RouterOutlet} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import {UIRouterModule} from '@uirouter/angular';

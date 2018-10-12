@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
@@ -16,9 +17,6 @@ import { AddJourneyComponent } from './add-journey/add-journey.component';
 import { AddJourneyService } from './add-journey/add-journey.service';
 import { JourneyComponent } from './journey/journey.component';
 
-const appRoutes: Routes = [
-  {path: '', component: AppComponent}
-];
 
 @NgModule({
   declarations: [
@@ -39,9 +37,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(
-      appRoutes
-    )
+    AppRoutingModule
   ],
   providers: [
     SigninService,
