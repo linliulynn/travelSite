@@ -18,7 +18,21 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 class JourneySerializer(serializers.ModelSerializer):
+    owner = serializers.PrimaryKeyRelatedField
     class Meta:
         model = Journey
         fields = '__all__'
+
+    def create(self, validated_data):
+        owner = validated_data['owner']
+        user = UserSerializer(owner)
+        journey = Journey(
+            journey_img = validated_data['journey_img'],
+            latitude = validated_data['latitude'],
+            longitude = validated_data['longitude'],
+            description = validated_data['description'],
+            owner = validated_data['owner']
+        )
+        journey.save()
+        return journey
 

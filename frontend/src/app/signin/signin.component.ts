@@ -12,29 +12,17 @@ import { AlertService } from '../alert/alert.service';
 export class SigninComponent implements OnInit {
   private signinForm: SigninForm;
   submitted = false;
-  
-  constructor(private signinService : SigninService,
-              private alertService : AlertService
+  constructor(private signinService: SigninService,
+              private alertService: AlertService
             ) { }
 
   ngOnInit() {
-    this.signinForm = new SigninForm("","","");
+    this.signinForm = new SigninForm('', '', '');
   }
 
-  onSubmit(form : SigninForm) { 
+  onSubmit(form: SigninForm) {
     this.submitted = true;
     console.log(form);
-    // let body = JSON.stringify({
-    //   username: form.name,
-    //   email: form.email,
-    //   password: form.password
-    // });
-    // console.log(body);
-    // this.http.post<SigninForm>(this.url, body, {
-    //   headers: new HttpHeaders().set('Content-Type', 'application/json'),
-    // }).subscribe(
-    //   (res)=>{ console.log(res);
-    // }); 
     this.signinService
     .login(form)
     .subscribe(

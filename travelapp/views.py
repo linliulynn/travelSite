@@ -1,3 +1,4 @@
+import base64
 import json
 from django.http import HttpResponse
 from rest_framework import status , generics , mixins , viewsets
@@ -5,6 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
 
+from django.core.files.base import ContentFile
 from django.contrib.auth.models import User 
 from django.contrib.auth import authenticate, login
 from .serializers import *
@@ -51,3 +53,15 @@ class LoginView(generics.GenericAPIView):
 class JourneyList(generics.ListCreateAPIView):
     queryset = Journey.objects.all()
     serializer_class = JourneySerializer
+
+    # def post(self, request, format=None):
+    # #     filename = request.data['journey_img']['filename'] 
+    # #     print (filename)
+    #     value = request.data
+    # #     journey_img = ContentFile(value, filename)
+    #     serializer = JourneySerializer(data=request.data)
+         
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -1,21 +1,15 @@
+<nav>
+  <a routerLink="/signin">Sign in</a>
+</nav>
+
+<router-outlet></router-outlet>
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <button (click)="getUsers()"> Get /users </button>
 </div>
-<app-location></app-location>
+<app-journey></app-journey>
 <app-alert></app-alert>
 <app-register></app-register>
-<app-signin></app-signin>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!-- <app-signin></app-signin> -->
 
+<app-add-journey><app-add-journey>

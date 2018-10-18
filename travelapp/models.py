@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 #         return self.user_name
 
 class Journey(models.Model):
-    journey_img = models.ImageField()
+    journey_img = models.TextField()
     latitude = models.DecimalField(max_digits=9, decimal_places=6)
     longitude = models.DecimalField(max_digits=9, decimal_places=6)
     description = models.CharField(max_length=100)

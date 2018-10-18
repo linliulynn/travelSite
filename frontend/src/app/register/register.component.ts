@@ -10,18 +10,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class RegisterComponent implements OnInit {
   private registerForm: RegisterForm;
   submitted = false;
-  url : string = 'http://localhost:8000/travel/users/';
+  url = 'http://localhost:8000/travel/users/';
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.registerForm = new RegisterForm("", "", "", "");
+    this.registerForm = new RegisterForm('', '', '', '');
   }
 
-  onSubmit(form : RegisterForm) { 
+  onSubmit(form: RegisterForm) {
     this.submitted = true;
     console.log(form);
-    let body = JSON.stringify({
+    const body = JSON.stringify({
       username: form.name,
       email: form.email,
       password: form.password
@@ -30,10 +30,9 @@ export class RegisterComponent implements OnInit {
     this.http.post<RegisterForm>(this.url, body, {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
     }).subscribe(
-      (res)=>{ console.log(res);
-    }); 
+      (res) => { console.log(res);
+    });
   }
-  
-  //TODO: Remove this when finished
+  // TODO: Remove this when finished
   get diagnostic() { return JSON.stringify(this.registerForm); }
 }

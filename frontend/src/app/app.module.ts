@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
@@ -12,10 +13,10 @@ import { SigninService} from './signin/signin.service';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert/alert.service';
 import { LocationComponent } from './location/location.component';
+import { AddJourneyComponent } from './add-journey/add-journey.component';
+import { AddJourneyService } from './add-journey/add-journey.service';
+import { JourneyComponent } from './journey/journey.component';
 
-const appRoutes: Routes = [
-  {path: '', component: AppComponent}
-]
 
 @NgModule({
   declarations: [
@@ -23,23 +24,25 @@ const appRoutes: Routes = [
     AppComponent,
     RegisterComponent,
     SigninComponent,
-    AlertComponent
+    AlertComponent,
+    AddJourneyComponent,
+    JourneyComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
-      apiKey: "",
-      libraries: ["places"]
+      apiKey: '',
+      libraries: ['places']
     }),
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(
-      appRoutes
-    )
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [
     SigninService,
-    AlertService],
+    AlertService,
+    AddJourneyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
