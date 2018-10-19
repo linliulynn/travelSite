@@ -38,13 +38,13 @@ export class AddJourneyComponent implements AfterViewInit {
     this.addjourneyForm = this.fb.group({
       journeyimg: null
     });
-    this.journey = new Journey("",0,0,"");
+    this.journey = new Journey('', 0, 0, '');
   }
 
   onFileChange(event) {
-    let reader = new FileReader();
+    const reader = new FileReader();
     if (event.target.files && event.target.files.length > 0) {
-      let file = event.target.files[0];
+      const file = event.target.files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
         this.addjourneyForm.get('journeyimg').setValue({
@@ -74,8 +74,8 @@ export class AddJourneyComponent implements AfterViewInit {
     const owner = JSON.parse(localStorage.getItem('currentUser'));
     console.log(owner.id);
     this.loading = true;
-    console.log(this.journey.latitude, this.journey.longitude); 
-    this.addJonrneyService.addJourney(this.journey,owner.id).subscribe(
+    console.log(this.journey.latitude, this.journey.longitude);
+    this.addJonrneyService.addJourney(this.journey, owner.id).subscribe(
       data => {
       console.log(data);
       },
