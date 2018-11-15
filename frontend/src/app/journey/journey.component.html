@@ -1,9 +1,13 @@
-<div class="container">
+<div class="journey">
 
-  <a routerLink="/addJourney">record your memory</a>
+  <div class="head">
+    <a routerLink="/addJourney">record your memory</a>
+  </div> 
     
   <button (click)="getJourneys()"> Get /journeys </button>
-  <agm-map [latitude]="lat" [longitude]="lng">
-    <agm-marker *ngFor="let journey of journeys" [latitude]= "journey.latitude" [longitude]= "journey.longitude"></agm-marker>
-  </agm-map>
+  <div class="map">
+    <agm-map [latitude]="lat" [longitude]="lng">
+      <agm-marker *ngFor="let journey of journeys" [latitude]= "journey.latitude" [longitude]= "journey.longitude"></agm-marker>
+    </agm-map>
+  </div>
 </div>
