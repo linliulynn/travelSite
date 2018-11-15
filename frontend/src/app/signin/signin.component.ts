@@ -7,7 +7,7 @@ import { AlertService } from '../alert/alert.service';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css']
+  styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
   private signinForm: SigninForm;

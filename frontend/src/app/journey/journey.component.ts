@@ -6,7 +6,7 @@ import { Journeys } from '../models/journeys';
 @Component({
   selector: 'app-journey',
   templateUrl: './journey.component.html',
-  styleUrls: ['./journey.component.css']
+  styleUrls: ['./journey.component.scss']
 })
 export class JourneyComponent implements OnInit {
   lat = 51.678418;

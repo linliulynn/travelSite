@@ -1,0 +1,17 @@
+.journey {
+  .head {
+    text-align: center;
+    font-size: 30px;
+  };
+  .map {
+    display: block;
+    height: 400px;
+    width: 80%;
+    margin: auto;
+
+    agm-map {
+      height: 100%;
+      width: 100%;
+    }
+  };
+}
