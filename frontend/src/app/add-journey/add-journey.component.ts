@@ -8,7 +8,7 @@ import { Journey } from '../models/journey';
 @Component({
   selector: 'app-add-journey',
   templateUrl: './add-journey.component.html',
-  styleUrls: ['./add-journey.component.css']
+  styleUrls: ['./add-journey.component.scss']
 })
 export class AddJourneyComponent implements AfterViewInit {
   addjourneyForm: FormGroup;
