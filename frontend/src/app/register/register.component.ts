@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterForm } from '../models/register-form';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PasswordValidation } from '../shared/password.validator';
 
 @Component({
   selector: 'app-register',
@@ -8,14 +10,22 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  private registerForm: RegisterForm;
+  registerForm: FormGroup;
   submitted = false;
   url = 'http://localhost:8000/travel/users/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private fb: FormBuilder) {}
 
   ngOnInit() {
-    this.registerForm = new RegisterForm('', '', '', '');
+    this.registerForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      passwordConfirmation: ['']
+    }, {
+      validator: PasswordValidation.MatchPassword
+    });
+
   }
 
   onSubmit(form: RegisterForm) {
