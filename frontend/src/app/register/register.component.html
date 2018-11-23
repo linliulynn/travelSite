@@ -1,10 +1,11 @@
 <div class="container">
   <h1>Sign Up</h1>
-  <form (ngSubmit)="onSubmit(registerForm)" [formGroup]="registerForm">
+  <app-alert></app-alert>
+  <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" 
-            required [(ngModel)]="registerForm.name" formControlName="name"> 
+            formControlName="name"> 
       <div *ngIf="registerForm.controls.name.errors?.required && registerForm.controls.name.touched"
            class="alert alert-danger">
         Name is required
@@ -13,18 +14,18 @@
     <div class="form-group">
       <label for="email">Email</label>
       <input type="text" class="form-control" id="email"
-            required [(ngModel)]="registerForm.email" formControlName="email"> 
+            required formControlName="email"> 
     </div>
 
     <div class="form-group">
       <label for="password">Password</label>
       <input type="text" class="form-control" id="password" 
-      required [(ngModel)]="registerForm.password" formControlName="password"> 
+      required formControlName="password"> 
     </div>
     <div class="form-group">
       <label for="passwordConfirmation">Confirm Password</label>
       <input type="text" class="form-control" id="passwordConfirmation"
-      required [(ngModel)]="registerForm.passwordConfirmation" formControlName="passwordConfirmation"> 
+      required formControlName="passwordConfirmation"> 
       <div *ngIf="registerForm.controls.passwordConfirmation.errors?.MatchPassword && registerForm.controls.passwordConfirmation.touched"
            class="alert alert-danger">
         password should be consistent
