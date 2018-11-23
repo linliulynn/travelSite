@@ -12,6 +12,7 @@ import { SigninComponent } from './signin/signin.component';
 import { SigninService} from './signin/signin.service';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert/alert.service';
+import { RegisterService } from './register/register.service';
 import { LocationComponent } from './location/location.component';
 import { AddJourneyComponent } from './add-journey/add-journey.component';
 import { AddJourneyService } from './add-journey/add-journey.service';
@@ -42,7 +43,8 @@ import { JourneyComponent } from './journey/journey.component';
   providers: [
     SigninService,
     AlertService,
-    AddJourneyService],
+    AddJourneyService,
+    RegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
