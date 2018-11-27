@@ -18,7 +18,7 @@ export class SigninService {
     });
     console.log(body);
     return this.http
-           .post<SigninForm>(this.loginUrl, body, {headers: this.header,})
+           .post<SigninForm>(this.loginUrl, body, {headers: this.header})
            .map(this.handleData.bind(this));
   }
 
