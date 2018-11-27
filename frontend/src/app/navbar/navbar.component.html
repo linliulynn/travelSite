@@ -1,0 +1,17 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="">Memory</a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+      <ul *ngIf="!isSignedIn()" class="nav navbar-nav navbar-right">
+        <li><a routerLink="/signin">Sign in</a></li>
+        <li><a routerLink="/signup">Sign up</a></li>
+      </ul>
+      <ul *ngIf="isSignedIn()" class="nav navbar-nav navbar-right">
+        <li>{{username}}</li>
+      </ul>
+    </div>
+  </div> 
+</nav>

@@ -40,7 +40,6 @@ export class RegisterComponent implements OnInit {
     .subscribe(
       data => {
         this.alertService.success('Success');
-
       },
       error => {
         this.alertService.error('Register failed');
