@@ -17,6 +17,7 @@ import { LocationComponent } from './location/location.component';
 import { AddJourneyComponent } from './add-journey/add-journey.component';
 import { AddJourneyService } from './add-journey/add-journey.service';
 import { JourneyComponent } from './journey/journey.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { JourneyComponent } from './journey/journey.component';
     SigninComponent,
     AlertComponent,
     AddJourneyComponent,
-    JourneyComponent
+    JourneyComponent,
+    NavbarComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
