@@ -20,18 +20,17 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(form: RegisterForm) {
     this.submitted = true;
-    console.log(form);
-    const body = JSON.stringify({
-      username: form.name,
-      email: form.email,
-      password: form.password
-    });
-    console.log(body);
-    this.http.post<RegisterForm>(this.url, body, {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-    }).subscribe(
-      (res) => { console.log(res);
-    });
+    console.log(this.registerForm);
+    this.registerService
+    .register(this.registerForm)
+    .subscribe(
+      data => {
+        this.alertService.success('Success');
+      },
+      error => {
+        this.alertService.error('Register failed');
+      }
+    );
   }
   // TODO: Remove this when finished
   get diagnostic() { return JSON.stringify(this.registerForm); }
