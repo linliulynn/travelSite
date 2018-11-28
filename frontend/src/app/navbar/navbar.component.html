@@ -9,9 +9,10 @@
         <li><a routerLink="/signin">Sign in</a></li>
         <li><a routerLink="/signup">Sign up</a></li>
       </ul>
-      <ul *ngIf="isSignedIn()" class="nav navbar-nav navbar-right">
-        <li>{{username}}</li>
-      </ul>
+      <div *ngIf="isSignedIn()" class="nav navbar-nav navbar-right">
+        <p class="navbar-text">{{username}}</p>
+        <button class="btn navbar-text" (click)="logout()">Log out</button>
+      </div>
     </div>
   </div> 
 </nav>
