@@ -18,6 +18,7 @@ import { AddJourneyComponent } from './add-journey/add-journey.component';
 import { AddJourneyService } from './add-journey/add-journey.service';
 import { JourneyComponent } from './journey/journey.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { LogoutService } from './shared/logout.service';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     SigninService,
     AlertService,
     AddJourneyService,
-    RegisterService],
+    RegisterService,
+    LogoutService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
