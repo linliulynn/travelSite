@@ -19,6 +19,7 @@ import { AddJourneyService } from './add-journey/add-journey.service';
 import { JourneyComponent } from './journey/journey.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LogoutService } from './shared/logout.service';
+import { ChatComponent } from './chat/chat.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { LogoutService } from './shared/logout.service';
     AlertComponent,
     AddJourneyComponent,
     JourneyComponent,
-    NavbarComponent
+    NavbarComponent,
+    ChatComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
