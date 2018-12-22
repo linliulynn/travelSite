@@ -11,6 +11,7 @@ export class ChatComponent implements OnInit {
   private socket;
   private url = 'http://localhost:4000';
   private message;
+  messages = [];
 
   constructor() { }
 
@@ -18,15 +19,13 @@ export class ChatComponent implements OnInit {
     this.socket = io(this.url);
     this.socket.on('message', (data) => {
       console.log('messageReceived' + data);
+      this.messages.push(data);
     });
-  }
-
-  update(message: string) {
-    this.message = message;
   }
 
   send() {
     this.socket.emit('message', this.message);
+    this.message = '';
   }
 
 }

@@ -1,6 +1,11 @@
-<div>
- <input #message (blur)="update(message.value)">
+<div class="container">
+  <ul *ngFor="let mes of messages">
+    <li>{{mes}}</li>
+  </ul>
+  <div class="form-group">
+    <textarea type="text" [(ngModel)]="message"></textarea>  
+  </div>
+  <button type="button" class="btn btn-la btn-default" (click)="send()">send message</button>
 </div>
-<button (click)="send()"></button>
 <!-- <p> chat here</p> -->
 
