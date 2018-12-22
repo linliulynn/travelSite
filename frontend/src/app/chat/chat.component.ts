@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as io from 'socket.io-client';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-chat',
@@ -17,8 +18,7 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     this.socket = io(this.url);
-    this.socket.on('message', (data) => {
-      console.log('messageReceived' + data);
+    this.getMessage().subscribe((data) => {
       this.messages.push(data);
     });
   }
@@ -26,6 +26,15 @@ export class ChatComponent implements OnInit {
   send() {
     this.socket.emit('message', this.message);
     this.message = '';
+  }
+
+  getMessage() {
+    return Observable.create((obsever) => {
+      this.socket.on('message', (data) => {
+        console.log('messageReceived' + data);
+        obsever.next(data);
+      });
+    });
   }
 
 }
