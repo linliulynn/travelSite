@@ -20,6 +20,7 @@ import { JourneyComponent } from './journey/journey.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LogoutService } from './shared/logout.service';
 import { ChatComponent } from './chat/chat.component';
+import { ChatService } from './chat/chat.service';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { ChatComponent } from './chat/chat.component';
     AlertService,
     AddJourneyService,
     RegisterService,
-    LogoutService],
+    LogoutService,
+    ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
