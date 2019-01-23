@@ -1,11 +1,16 @@
 <div class="container">
-  <ul *ngFor="let mes of messages">
-    <li>{{mes}}</li>
-  </ul>
-  <div class="form-group">
-    <textarea type="text" [(ngModel)]="message"></textarea>  
+  <div class="chat">
+    <div class="chat-header">
+      <div class="chat-name">Chat</div>
+    </div>
+    <div class="chat-history">
+      <div class="message" *ngFor="let message of messages">
+        <span>{{message}}</span>
+      </div>
+    </div>
+    <div class="chat-message">
+      <textarea type="text" [(ngModel)]="message"></textarea>
+      <button type="button" class="btn btn-la btn-default" (click)="send()">send message</button>
+    </div>  
   </div>
-  <button type="button" class="btn btn-la btn-default" (click)="send()">send message</button>
 </div>
-<!-- <p> chat here</p> -->
-
