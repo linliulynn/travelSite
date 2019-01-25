@@ -13,7 +13,17 @@ io.on('connection', function(socket) {
 
     socket.on('message', function(message) {
         console.log('get message' + message);
-        io.emit('message', message);
+        io.sockets.emit('message', message);
+    });
+
+    socket.on('typing', function(data) {
+        console.log(data);
+        socket.broadcast.emit('typing', data);
+    });
+
+    socket.on('unTyping', function(data) {
+        console.log(data);
+        socket.broadcast.emit('unTyping', data);
     });
 });
 

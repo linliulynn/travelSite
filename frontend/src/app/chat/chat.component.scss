@@ -1,3 +1,5 @@
+$hint-color: #B0A9A9;
+
 .chat {
   width: 30%;
   background: #F2F5F8;
@@ -15,6 +17,13 @@
 		overflow-y: scroll;
 		padding: 30px 30px 20px;
 		border-bottom: 2px solid white;
+		display: flex;
+
+		.typing {
+			align-self: flex-end;
+			font-style: italic;
+			color: $hint-color;
+		}
 	}
 
 	.message {
