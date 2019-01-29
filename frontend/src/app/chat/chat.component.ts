@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from './chat.service';
+import { Message } from '../models/message';
 
 @Component({
   selector: 'app-chat',
@@ -9,15 +10,18 @@ import { ChatService } from './chat.service';
 export class ChatComponent implements OnInit {
 
   private message;
-  messages = [];
+  public messages: Message[] = [];
   typingMessage: String;
+  private userName;
+  private mesData: Message;
 
   constructor(private chatService: ChatService) { }
 
   ngOnInit() {
+    this.userName = '';
+    this.mesData = new Message('', '');
     this.chatService.initSocket();
     this.chatService.getMessage('message').subscribe((data) => {
-      // this.typingInfo = '';
       this.messages.push(data);
     });
     this.chatService.getMessage('typing').subscribe((data) => {
@@ -29,7 +33,9 @@ export class ChatComponent implements OnInit {
   }
 
   send() {
-    this.chatService.sendMessage('message', this.message);
+    this.mesData.name = this.userName;
+    this.mesData.message = this.message;
+    this.chatService.sendMessage('message', this.mesData);
     this.message = '';
   }
 
