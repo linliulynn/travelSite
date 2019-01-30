@@ -2,15 +2,21 @@
   <div class="chat">
     <div class="chat-header">
       <div class="chat-name">Chat</div>
+      <div [hidden]="!userName">{{userName}}</div>
     </div>
     <div class="chat-history">
       <div class="message" *ngFor="let message of messages">
-        <span>{{message}}</span>
+        <span>{{message.name}}</span>
+        <span>{{message.message}}</span>
       </div>
+      <span class="typing">{{typingMessage}}</span>
     </div>
     <div class="chat-message">
-      <textarea type="text" [(ngModel)]="message"></textarea>
+      <textarea type="text" [(ngModel)]="message" (keyup)="typing()" (blur)="unTyping()"></textarea>
       <button type="button" class="btn btn-la btn-default" (click)="send()">send message</button>
-    </div>  
+    </div>
+    <div>
+      <input type="text" [(ngModel)]="userName">
+    </div>
   </div>
 </div>
