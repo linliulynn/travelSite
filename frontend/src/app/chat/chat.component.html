@@ -5,9 +5,12 @@
       <div [hidden]="!userName">{{userName}}</div>
     </div>
     <div class="chat-history">
-      <div class="message" *ngFor="let message of messages">
-        <span>{{message.name}}</span>
-        <span>{{message.message}}</span>
+      <div class="message"  *ngFor="let message of messages">
+        <div [ngClass]="{'my-message': message.name === userName,
+                        'other-message': message.name != userName}">
+          <div class="user-name">{{message.name}}</div>
+          <div class="message-detail">{{message.message}}</div>
+        </div>    
       </div>
       <span class="typing">{{typingMessage}}</span>
     </div>

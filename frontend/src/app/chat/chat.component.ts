@@ -18,6 +18,8 @@ export class ChatComponent implements OnInit {
   constructor(private chatService: ChatService) { }
 
   ngOnInit() {
+    // TODO: replace the username define part after testing
+    // this.userName = JSON.parse(localStorage.getItem('currentUser')).username || '';
     this.userName = '';
     this.mesData = new Message('', '');
     this.chatService.initSocket();
