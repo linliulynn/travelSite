@@ -14,8 +14,12 @@ export class ChatService {
     this.socket = io(this.url);
   }
 
-  sendMessage(messageName: String, message: any) {
-    this.socket.emit(messageName, message);
+  joinRoom(userName: string) {
+    this.socket.emit('join', userName);
+  }
+
+  sendMessage(messageName: String, to: String, message: any) {
+    this.socket.emit(messageName, to, message);
   }
 
   getMessage(messageName: String) {
