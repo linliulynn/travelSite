@@ -11,9 +11,14 @@ const port = 4000;
 io.on('connection', function(socket) {
     console.log('User connected');
 
-    socket.on('message', function(message) {
+    socket.on('join', function(username) {
+        console.log('join room' + username);
+        socket.join(username);
+    });
+
+    socket.on('message', function(to, message) {
         console.log('get message' + message);
-        io.sockets.emit('message', message);
+        io.in(to).emit('message', message);
     });
 
     socket.on('typing', function(data) {
