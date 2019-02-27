@@ -34,6 +34,9 @@ export class ChatComponent implements OnInit {
     this.chatService.getMessage('unTyping').subscribe((data) => {
       this.typingMessage = '';
     });
+    this.chatService.getMessage('joinNewRoom').subscribe((data) => {
+      console.log('need to join a new room');
+    });
   }
 
   send() {
@@ -44,16 +47,17 @@ export class ChatComponent implements OnInit {
   }
 
   joinRoom() {
+    // TODO: replace this with conversion modal and pass conversionId
     this.chatService.joinRoom(this.to);
     this.chatService.joinRoom(this.userName);
     // this.chatService.joinRoom('lin');
   }
 
-  // typing() {
-  //   this.chatService.sendMessage('typing', 'typing test...');
-  // }
+  typing() {
+    this.chatService.sendMessage('typing', this.to, 'typing test...');
+  }
 
-  // unTyping() {
-  //   this.chatService.sendMessage('unTyping', 'user not typing');
-  // }
+  unTyping() {
+    this.chatService.sendMessage('unTyping', this.to, 'user not typing');
+  }
 }

@@ -13,6 +13,7 @@ io.on('connection', function(socket) {
 
     socket.on('join', function(username) {
         console.log('join room' + username);
+        socket.broadcast.emit('joinNewRoom', username);
         socket.join(username);
     });
 
@@ -21,14 +22,14 @@ io.on('connection', function(socket) {
         io.in(to).emit('message', message);
     });
 
-    socket.on('typing', function(data) {
+    socket.on('typing', function(to, data) {
         console.log(data);
-        socket.broadcast.emit('typing', data);
+        socket.broadcast.to(to).emit('typing', data);
     });
 
-    socket.on('unTyping', function(data) {
+    socket.on('unTyping', function(to, data) {
         console.log(data);
-        socket.broadcast.emit('unTyping', data);
+        socket.broadcast.to(to).emit('unTyping', data);
     });
 });
 
