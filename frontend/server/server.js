@@ -25,6 +25,16 @@ io.on('connection', function(socket) {
         console.log(data);
         socket.broadcast.emit('unTyping', data);
     });
+
+    socket.on('createChannel', function(data) {
+        console.log(data);
+        if (data.names != null) {
+            data.names.forEach((name)=> {
+                console.log(name);
+                socket.broadcast.emit(name, data.convId);
+            });
+        }
+    });
 });
 
 server.listen(port, function() {
