@@ -26,4 +26,8 @@ export class ChatService {
       });
     });
   }
+  // Send message into a specific room
+  sendMessageToRoom(infoName: String, info: any) {
+    this.socket.emit(infoName, info);
+  }
 }

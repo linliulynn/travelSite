@@ -10,6 +10,11 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class ChatComponent implements OnInit {
 
+  // TODO: more than one user selection and test
+  // TODO: html template modification
+  // TODO: chat as a model
+  // TODO: messages design change, not only one list, there is a list for each conversation
+
   private message;
   public messages: Message[] = [];
   typingMessage: String;
@@ -18,7 +23,7 @@ export class ChatComponent implements OnInit {
   private chatUsernames: String[] = [];
   private chatUser;
   private chatsList: {convId: number, names: string[]} [] = [];
-  private convInfo;
+  private activeChat;
 
   constructor(private chatService: ChatService) { }
 
@@ -50,12 +55,18 @@ export class ChatComponent implements OnInit {
   onBlur() {
     this.chatService.getMessage(this.userName).subscribe((data) => {
       console.log(data);
+      if (data[0] === 'joinRoom') {
+        this.findChatByConvId(data[1]);
+        this.chatService.sendMessage('joinRoom', data[1]);
+      }
     });
   }
   send() {
     this.mesData.name = this.userName;
     this.mesData.message = this.message;
-    this.chatService.sendMessage('message', this.mesData);
+    this.messages.push(this.mesData);
+    this.chatService.sendMessageToRoom('sendMessageToRoom', [this.activeChat.convId, this.mesData]);
+    // this.chatService.sendMessage('message', this.mesData);
     this.message = '';
   }
 
@@ -70,8 +81,9 @@ export class ChatComponent implements OnInit {
   // select a user to chat
   userSelect() {
     this.findChatId(this.userName, this.chatUser);
-    if (this.convInfo != null) {
-      this.chatService.sendMessage('createChannel', this.convInfo);
+    if (this.activeChat != null) {
+      this.chatService.sendMessage('createChannel', this.activeChat);
+      this.chatService.sendMessage('joinRoom', this.activeChat.convId);
     }
   }
 
@@ -81,8 +93,16 @@ export class ChatComponent implements OnInit {
         chat.names = chat.names.sort();
         let value = [username, chatUser].sort();
         if (JSON.stringify(chat.names) === JSON.stringify(value))  {
-         this.convInfo = chat;
+         this.activeChat = chat;
         }
+      }
+    });
+  }
+
+  findChatByConvId(id: number) {
+    this.chatsList.forEach((chat) => {
+      if (chat.convId === id) {
+        this.activeChat = chat;
       }
     });
   }
