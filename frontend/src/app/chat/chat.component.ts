@@ -21,7 +21,7 @@ export class ChatComponent implements OnInit {
   private userName;
   private mesData: Message;
   private chatUsernames: String[] = [];
-  private chatUser;
+  private chatUserList: String[];
   private chatsList: {convId: number, names: string[]} [] = [];
   private activeChat;
 
@@ -34,7 +34,7 @@ export class ChatComponent implements OnInit {
     this.mesData = new Message('', '');
     // TODO: get friends name from backend, hard coded for convenience right now
     this.chatUsernames = ['Mary', 'Bob', 'Jane'];
-    this.chatUser = '';
+    this.chatUserList = [];
     this.chatService.initSocket();
     this.chatService.getMessage('message').subscribe((data) => {
       this.messages.push(data);
@@ -79,22 +79,20 @@ export class ChatComponent implements OnInit {
   }
 
   // select a user to chat
-  userSelect() {
-    this.findChatId(this.userName, this.chatUser);
+  select() {
+    this.findChatId(this.userName, this.chatUserList);
     if (this.activeChat != null) {
       this.chatService.sendMessage('createChannel', this.activeChat);
       this.chatService.sendMessage('joinRoom', this.activeChat.convId);
     }
   }
 
-  findChatId(username: string, chatUser: string) {
+  findChatId(username: string, chatUserList: String[]) {
     this.chatsList.forEach((chat) => {
-      if (chat.names.length === 2) {
-        chat.names = chat.names.sort();
-        let value = [username, chatUser].sort();
-        if (JSON.stringify(chat.names) === JSON.stringify(value))  {
-         this.activeChat = chat;
-        }
+      chat.names = chat.names.sort();
+      let value = chatUserList.concat(username).sort();
+      if (JSON.stringify(chat.names) === JSON.stringify(value))  {
+        this.activeChat = chat;
       }
     });
   }

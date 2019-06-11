@@ -22,13 +22,14 @@
       <label>your name</label>
       <input type="text" [(ngModel)]="userName" (blur)="onBlur()">
     </div>
-    <div>
+    <div class="user-list">
       <label>select a user to chat:</label>
-      <select [(ngModel)]="chatUser" (ngModelChange)="userSelect($event)">
-        <option [ngValue]="chatUsername" *ngFor="let chatUsername of chatUsernames">
+      <select [(ngModel)]="chatUserList" multiple>
+        <option [ngValue]="chatUsername" *ngFor="let chatUsername of chatUsernames" class="large">
           {{chatUsername}}
         </option>
       </select>
+      <button type="button" class="btn btn-la btn-default" (click)="select()">select</button>
     </div>
   </div>
 </div>
