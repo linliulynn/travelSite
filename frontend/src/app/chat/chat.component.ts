@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from './chat.service';
 import { Message } from '../models/message';
+import { Chat } from '../models/chat';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
@@ -10,19 +11,16 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class ChatComponent implements OnInit {
 
-  // TODO: more than one user selection and test
   // TODO: html template modification
-  // TODO: chat as a model
   // TODO: messages design change, not only one list, there is a list for each conversation
 
   private message;
   public messages: Message[] = [];
   typingMessage: String;
   private userName;
-  private mesData: Message;
   private chatUsernames: String[] = [];
   private chatUserList: String[];
-  private chatsList: {convId: number, names: string[]} [] = [];
+  private chatsList: Chat[] = [];
   private activeChat;
 
   constructor(private chatService: ChatService) { }
@@ -31,7 +29,6 @@ export class ChatComponent implements OnInit {
     // TODO: replace the username define part after testing
     // this.userName = JSON.parse(localStorage.getItem('currentUser')).username || '';
     this.userName = '';
-    this.mesData = new Message('', '');
     // TODO: get friends name from backend, hard coded for convenience right now
     this.chatUsernames = ['Mary', 'Bob', 'Jane'];
     this.chatUserList = [];
@@ -46,9 +43,9 @@ export class ChatComponent implements OnInit {
       this.typingMessage = '';
     });
     this.chatsList = [
-      {'convId': 1, 'names': ['Mary', 'Bob', 'Jane'] },
-      {'convId': 2, 'names': ['Mary', 'Bob'] },
-      {'convId': 3, 'names': ['Mary', 'Jane'] }
+      {'convId': 1, 'names': ['Mary', 'Bob', 'Jane'], 'messages': []},
+      {'convId': 2, 'names': ['Mary', 'Bob'], 'messages': []},
+      {'convId': 3, 'names': ['Mary', 'Jane'], 'messages': []}
     ];
   }
 
@@ -62,10 +59,10 @@ export class ChatComponent implements OnInit {
     });
   }
   send() {
-    this.mesData.name = this.userName;
-    this.mesData.message = this.message;
-    this.messages.push(this.mesData);
-    this.chatService.sendMessageToRoom('sendMessageToRoom', [this.activeChat.convId, this.mesData]);
+    let mesData = new Message(this.userName, this.message);
+    this.messages.push(mesData);
+    this.activeChat.messages.push(mesData);
+    this.chatService.sendMessageToRoom('sendMessageToRoom', [this.activeChat.convId, mesData]);
     // this.chatService.sendMessage('message', this.mesData);
     this.message = '';
   }
