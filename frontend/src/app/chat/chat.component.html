@@ -1,35 +1,44 @@
 <div class="container">
-  <div class="chat">
-    <div class="chat-header">
-      <div class="chat-name">Chat</div>
-      <div [hidden]="!userName">{{userName}}</div>
+  <div class="chat-list">
+    <div class="chat-friend-list">
+      <li *ngFor="let chat of chatsList">
+        {{chat.names}}
+      </li>
     </div>
-    <div class="chat-history">
-      <div class="message"  *ngFor="let message of messages">
-        <div [ngClass]="{'my-message': message.name === userName,
-                        'other-message': message.name != userName}">
-          <div class="user-name">{{message.name}}</div>
-          <div class="message-detail">{{message.message}}</div>
-        </div>    
+    <div class="chat">
+      <div class="chat-header">
+        <div class="chat-name">Chat</div>
+        <div [hidden]="!userName">{{userName}}</div>
       </div>
-      <span class="typing">{{typingMessage}}</span>
+
+      <div class="chat-history">
+        <div class="message"  *ngFor="let message of messages">
+          <div [ngClass]="{'my-message': message.name === userName,
+                          'other-message': message.name != userName}">
+            <div class="user-name">{{message.name}}</div>
+            <div class="message-detail">{{message.message}}</div>
+          </div>    
+        </div>
+        <span class="typing">{{typingMessage}}</span>
+      </div>
+    
+      <div class="chat-message">
+        <textarea type="text" [(ngModel)]="message" (keyup)="typing()" (blur)="unTyping()"></textarea>
+        <button type="button" class="btn btn-la btn-default" (click)="send()">send message</button>
+      </div> 
     </div>
-    <div class="chat-message">
-      <textarea type="text" [(ngModel)]="message" (keyup)="typing()" (blur)="unTyping()"></textarea>
-      <button type="button" class="btn btn-la btn-default" (click)="send()">send message</button>
-    </div>
-    <div>
-      <label>your name</label>
-      <input type="text" [(ngModel)]="userName" (blur)="onBlur()">
-    </div>
-    <div class="user-list">
-      <label>select a user to chat:</label>
-      <select [(ngModel)]="chatUserList" multiple>
-        <option [ngValue]="chatUsername" *ngFor="let chatUsername of chatUsernames" class="large">
-          {{chatUsername}}
-        </option>
-      </select>
-      <button type="button" class="btn btn-la btn-default" (click)="select()">select</button>
-    </div>
+  </div>
+  <div class="your-name">
+    <label>your name</label>
+    <input type="text" [(ngModel)]="userName" (blur)="onBlur()">
+  </div>
+  <div class="user-list">
+    <label>select a user to chat:</label>
+    <select [(ngModel)]="chatUserList" multiple>
+      <option [ngValue]="chatUsername" *ngFor="let chatUsername of chatUsernames" class="large">
+        {{chatUsername}}
+      </option>
+    </select>
+    <button type="button" class="btn btn-la btn-default" (click)="select()">select</button>
   </div>
 </div>

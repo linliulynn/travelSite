@@ -1,64 +1,89 @@
 $hint-color: #B0A9A9;
 
-.chat {
-  width: 30%;
-  background: #F2F5F8;
-  border-radius: 5px;
+.container {
+	
+	
+	.chat-list {
+		width: 750px;
+		margin: 20 auto;
+		border-radius: 5px;
+		background: #444753;
+		height: 700px;
 
-  color: #434651;
-
-	.chat-header {
-		padding: 20px;
-		border-bottom: 2px solid white;
+		.chat {
+			width: 490px;
+			height: 700px;
+			float: left;
+			background: #F2F5F8;
+			border-top-right-radius: 5px;
+			border-bottom-right-radius: 5px;
+		  
+			color: #434651;
+		  
+			  .chat-header {
+				  padding: 20px;
+				  border-bottom: 2px solid white;
+			  }
+		  
+			  .chat-history {
+				  height: 400px;
+				  overflow-y: scroll;
+				  padding: 30px 30px 20px;
+				  border-bottom: 2px solid white;
+				  display: flex;
+				  flex-direction: column;
+		  
+				  .typing {
+					  align-self: flex-end;
+					  font-style: italic;
+					  color: $hint-color;
+				  }
+				  .message {
+					  .my-message {
+						  padding-left: 30px;
+						  .user-name {
+							  text-align: right;
+							  padding-right: 5px;
+						  }
+						  .message-detail {
+							  background: #86BB71;
+							  color: white;
+						  }
+					  }
+		  
+					  .other-message {
+						  padding-right: 30px;
+						  .user-name {
+							  text-align: left;
+							  padding-left: 5px;
+						  }
+						  .message-detail {
+							  background: #94C2ED;
+							  color: white;
+						  }
+					  }
+		  
+		  
+					  .message-detail {
+						  padding: 18px 20px;
+						  font-size: 16px;
+						  border-radius: 7px;
+						  margin-bottom: 30px;
+					  }
+				  }
+			  }
 	}
-
-	.chat-history {
-		height: 400px;
-		overflow-y: scroll;
-		padding: 30px 30px 20px;
-		border-bottom: 2px solid white;
-		display: flex;
-		flex-direction: column;
-
-		.typing {
-			align-self: flex-end;
-			font-style: italic;
-			color: $hint-color;
-		}
-		.message {
-			.my-message {
-				padding-left: 30px;
-				.user-name {
-					text-align: right;
-					padding-right: 5px;
-				}
-				.message-detail {
-					background: #86BB71;
-					color: white;
-				}
-			}
-
-			.other-message {
-				padding-right: 30px;
-				.user-name {
-					text-align: left;
-					padding-left: 5px;
-				}
-				.message-detail {
-					background: #94C2ED;
-					color: white;
-				}
-			}
-
-
-			.message-detail {
-				padding: 18px 20px;
-				font-size: 16px;
-				border-radius: 7px;
-				margin-bottom: 30px;
-			}
+	.chat-friend-list {
+		width: 260px;
+		float: left;
+		li {
+			padding-bottom: 20px;
+			color: white;
 		}
 	}
+	
+}
+
 
 	
 
@@ -82,23 +107,22 @@ $hint-color: #B0A9A9;
 			}
 		}
 	}
-
-	.user-list {
+}
+.user-list {
+	width: 100%;
+	label {
+		display: block;
+	}
+	select {
 		width: 100%;
-		label {
-			display: block;
+		display: block;
+		overflow: hidden;
+		option {
+			border-bottom: 0.5px solid #c7cacc;
+			text-align: center;
 		}
-		select {
-			width: 100%;
-			display: block;
-			overflow: hidden;
-			option {
-				border-bottom: 0.5px solid #c7cacc;
-				text-align: center;
-			}
-		}
-		button {
-			display: block;
-		}
+	}
+	button {
+		display: block;
 	}
 }
