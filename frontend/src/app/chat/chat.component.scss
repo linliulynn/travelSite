@@ -82,4 +82,23 @@ $hint-color: #B0A9A9;
 			}
 		}
 	}
+
+	.user-list {
+		width: 100%;
+		label {
+			display: block;
+		}
+		select {
+			width: 100%;
+			display: block;
+			overflow: hidden;
+			option {
+				border-bottom: 0.5px solid #c7cacc;
+				text-align: center;
+			}
+		}
+		button {
+			display: block;
+		}
+	}
 }

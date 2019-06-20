@@ -25,6 +25,30 @@ io.on('connection', function(socket) {
         console.log(data);
         socket.broadcast.emit('unTyping', data);
     });
+
+    // socket to create a new chat
+    socket.on('createChannel', function(data) {
+        console.log(data);
+        // All the chat users to join this room
+        if (data.names != null) {
+            data.names.forEach((name)=> {
+                console.log(name);
+                socket.broadcast.emit(name, ["joinRoom", data.convId]);
+            });
+        }
+    });
+
+    // socket to join a room
+    socket.on('joinRoom', function(roomId) {
+        console.log('room joined');
+        socket.join(roomId);
+    });
+
+    // sending message to a specific room
+    socket.on('sendMessageToRoom', function(data) {
+        console.log(data);
+        socket.to(data[0]).emit('message', data[1]);
+    });
 });
 
 server.listen(port, function() {
