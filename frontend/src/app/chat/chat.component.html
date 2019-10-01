@@ -1,8 +1,9 @@
 <div class="container">
   <div class="chat-list">
     <div class="chat-friend-list">
+      <h2 class="friend-list-header">direct message</h2>
       <li *ngFor="let chat of chatsList">
-        {{chat.names}}
+        <button class="friend-button">{{chat.names}}</button>
       </li>
     </div>
     <div class="chat">

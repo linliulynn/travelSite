@@ -76,9 +76,21 @@ $hint-color: #B0A9A9;
 	.chat-friend-list {
 		width: 260px;
 		float: left;
-		li {
-			padding-bottom: 20px;
+		.friend-list-header {
+			text-align: left;
 			color: white;
+			font-size:20px;
+			padding: 30px 0 20px 20px;
+		}
+		li {
+			text-align: left;
+			padding-bottom: 20px;
+			button {
+				background: #444753;
+				border: none;
+				color: white;
+				font-size: 16px;
+			}
 		}
 	}
 	
