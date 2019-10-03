@@ -1,8 +1,9 @@
 <div class="container">
   <div class="chat-list">
     <div class="chat-friend-list">
+      <h2 class="friend-list-header">direct message</h2>
       <li *ngFor="let chat of chatsList">
-        {{chat.names}}
+        <button class="friend-button" (click)="activate(chat)" [ngClass]="{'active': activeChat.convId === chat.convId}">{{chat.names}}</button>
       </li>
     </div>
     <div class="chat">
@@ -12,7 +13,7 @@
       </div>
 
       <div class="chat-history">
-        <div class="message"  *ngFor="let message of messages">
+        <div class="message" *ngFor="let message of activeChat.messages">
           <div [ngClass]="{'my-message': message.name === userName,
                           'other-message': message.name != userName}">
             <div class="user-name">{{message.name}}</div>
