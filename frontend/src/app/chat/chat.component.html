@@ -3,7 +3,7 @@
     <div class="chat-friend-list">
       <h2 class="friend-list-header">direct message</h2>
       <li *ngFor="let chat of chatsList">
-        <button class="friend-button" (click)="activate(chat)" [ngClass]="{'active': activeChat.id === chat.id}">{{chat.names}}</button>
+        <button class="friend-button" (click)="activate(chat)" [ngClass]="{'active': activeChat.convId === chat.convId}">{{chat.names}}</button>
       </li>
     </div>
     <div class="chat">

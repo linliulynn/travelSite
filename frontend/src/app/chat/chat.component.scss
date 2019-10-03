@@ -1,8 +1,7 @@
 $hint-color: #B0A9A9;
 
 .container {
-	
-	
+
 	.chat-list {
 		width: 750px;
 		margin: 20 auto;
@@ -19,6 +18,12 @@ $hint-color: #B0A9A9;
 			border-bottom-right-radius: 5px;
 		  
 			color: #434651;
+
+			.btn {
+				&:hover {
+					background: #6c6f7a;
+				}
+			}
 		  
 			  .chat-header {
 				  padding: 20px;
@@ -89,17 +94,18 @@ $hint-color: #B0A9A9;
 			button {
 				width: 100%;
 				height: 100%;
-				background: #444753;
+				background: #45464d;
 				border: none;
 				color: white;
 				font-size: 16px;
 				&:hover {
 					background: #6c6f7a;
 				}
-				.active {
-					border: 1px;
-					background: #8c96bd;
-				}
+				
+			}
+			.active {
+				border: none;
+				background: #626266;
 			}
 		}
 	}

@@ -43,7 +43,7 @@ export class ChatComponent implements OnInit {
       this.typingMessage = '';
     });
     this.chatsList = [
-      {'convId': 1, 'names': ['Mary', 'Bob', 'Jane'], 'messages': [new Message('Bob', 'hello')]},
+      {'convId': 1, 'names': ['Mary', 'Bob', 'Jane'], 'messages': [new Message('Bob', 'hello'), new Message('Mary', 'hello')]},
       {'convId': 2, 'names': ['Mary', 'Bob'], 'messages': []},
       {'convId': 3, 'names': ['Mary', 'Jane'], 'messages': []}
     ];
