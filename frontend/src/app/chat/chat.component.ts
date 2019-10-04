@@ -106,4 +106,12 @@ export class ChatComponent implements OnInit {
   activate(chat: Chat) {
     this.activeChat = chat;
   }
+
+  changeChatUser(chatUsername: String) {
+    if (this.chatUserList.includes(chatUsername)) {
+      this.chatUserList = this.chatUserList.filter(user => user !== chatUsername);
+    } else {
+      this.chatUserList.push(chatUsername);
+    }
+  }
 }
