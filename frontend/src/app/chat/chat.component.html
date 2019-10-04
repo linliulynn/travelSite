@@ -10,6 +10,9 @@
       <div class="chat-header">
         <div class="chat-name">Chat</div>
         <div [hidden]="!userName">{{userName}}</div>
+        <div (click)="addChat()">
+          <span class="glyphicon glyphicon-plus"></span>
+        </div>
       </div>
 
       <div class="chat-history">
@@ -32,14 +35,16 @@
   <div class="your-name">
     <label>your name</label>
     <input type="text" [(ngModel)]="userName" (blur)="onBlur()">
-  </div>
+  </div> 
+</div>
+<div class="pop-up">
   <div class="user-list">
-    <label>select a user to chat:</label>
-    <select [(ngModel)]="chatUserList" multiple>
-      <option [ngValue]="chatUsername" *ngFor="let chatUsername of chatUsernames" class="large">
-        {{chatUsername}}
-      </option>
-    </select>
+    <div class="user-list-header">select a user to chat:</div>
+    <div *ngFor="let chatUsername of chatUsernames; let idx = index" class="user-element">
+      <input type="radio" id="idx" [attr.name]="chatUsername" [checked]="chatUserList.includes('chatUsername')" [value]="chatUsername"
+      (click)="changeChatUser(chatUsername)">
+      <label for="idx">{{chatUsername}}</label>
+    </div>
     <button type="button" class="btn btn-la btn-default" (click)="select()">select</button>
   </div>
 </div>
