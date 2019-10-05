@@ -22,6 +22,7 @@ export class ChatComponent implements OnInit {
   private chatUserList: String[];
   private chatsList: Chat[] = [];
   private activeChat;
+  private openPopUp: boolean;
 
   constructor(private chatService: ChatService) { }
 
@@ -48,6 +49,8 @@ export class ChatComponent implements OnInit {
       {'convId': 3, 'names': ['Mary', 'Jane'], 'messages': []}
     ];
     this.activeChat = new Chat(0, [], []);
+    // determin if open pop up
+    this.openPopUp = false;
   }
 
   onBlur() {
@@ -113,5 +116,14 @@ export class ChatComponent implements OnInit {
     } else {
       this.chatUserList.push(chatUsername);
     }
+  }
+
+  // add new chat
+  addChat() {
+    this.openPopUp = true;
+  }
+
+  cancel() {
+    this.openPopUp = false;
   }
 }
