@@ -21,6 +21,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LogoutService } from './shared/logout.service';
 import { ChatComponent } from './chat/chat.component';
 import { ChatService } from './chat/chat.service';
+import { FriendsComponent } from './friends/friends.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ChatService } from './chat/chat.service';
     AddJourneyComponent,
     JourneyComponent,
     NavbarComponent,
-    ChatComponent
+    ChatComponent,
+    FriendsComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
