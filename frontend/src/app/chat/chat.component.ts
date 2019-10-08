@@ -18,8 +18,8 @@ export class ChatComponent implements OnInit {
   public messages: Message[] = [];
   typingMessage: String;
   private userName;
-  private chatUsernames: String[] = [];
-  private chatUserList: String[];
+  // private chatUsernames: String[] = [];
+  // private chatUserList: String[];
   private chatsList: Chat[] = [];
   private activeChat;
   private openPopUp: boolean;
@@ -31,8 +31,8 @@ export class ChatComponent implements OnInit {
     // this.userName = JSON.parse(localStorage.getItem('currentUser')).username || '';
     this.userName = '';
     // TODO: get friends name from backend, hard coded for convenience right now
-    this.chatUsernames = ['Mary', 'Bob', 'Jane'];
-    this.chatUserList = [];
+    // this.chatUsernames = ['Mary', 'Bob', 'Jane'];
+    // this.chatUserList = [];
     this.chatService.initSocket();
     this.chatService.getMessage('message').subscribe((data) => {
       this.messages.push(data);
@@ -80,13 +80,13 @@ export class ChatComponent implements OnInit {
   }
 
   // select a user to chat
-  select() {
-    this.findChatId(this.userName, this.chatUserList);
-    if (this.activeChat != null) {
-      this.chatService.sendMessage('createChannel', this.activeChat);
-      this.chatService.sendMessage('joinRoom', this.activeChat.convId);
-    }
-  }
+  // select() {
+  //   this.findChatId(this.userName, this.chatUserList);
+  //   if (this.activeChat != null) {
+  //     this.chatService.sendMessage('createChannel', this.activeChat);
+  //     this.chatService.sendMessage('joinRoom', this.activeChat.convId);
+  //   }
+  // }
 
   findChatId(username: string, chatUserList: String[]) {
     this.chatsList.forEach((chat) => {
@@ -110,20 +110,20 @@ export class ChatComponent implements OnInit {
     this.activeChat = chat;
   }
 
-  changeChatUser(chatUsername: String) {
-    if (this.chatUserList.includes(chatUsername)) {
-      this.chatUserList = this.chatUserList.filter(user => user !== chatUsername);
-    } else {
-      this.chatUserList.push(chatUsername);
-    }
-  }
+  // changeChatUser(chatUsername: String) {
+  //   if (this.chatUserList.includes(chatUsername)) {
+  //     this.chatUserList = this.chatUserList.filter(user => user !== chatUsername);
+  //   } else {
+  //     this.chatUserList.push(chatUsername);
+  //   }
+  // }
 
   // add new chat
   addChat() {
     this.openPopUp = true;
   }
 
-  cancel() {
-    this.openPopUp = false;
+  onClose(close: boolean) {
+    this.openPopUp = !close;
   }
 }
