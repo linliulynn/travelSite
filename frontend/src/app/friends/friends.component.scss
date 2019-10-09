@@ -1,0 +1,37 @@
+.user-list {
+    min-width: 300px;
+    background: #fff;
+    height: 600px;
+    width: 30%;
+    margin: 70px auto;
+    padding: 30px 0;
+    .user-list-header {
+        font-size: 20px;
+        margin-bottom: 30px;
+        padding: 0 30px;
+        border-bottom: solid 1px #B0A9A9;
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+    }
+    .user-elements {
+        font-size: 15px;
+        .chat-user-elem {
+            display: flex;
+            justify-content: flex-start;
+            padding: 10px 0;
+            &:hover {
+                background: #c7c8ca;
+            }
+            input {
+                flex-grow: 1;
+            }
+            label {
+                flex-grow: 2;
+                margin-bottom: 0;
+            }
+        }
+    }
+}

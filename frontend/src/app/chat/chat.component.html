@@ -56,5 +56,5 @@
   </div>
 </div> -->
 <div class="pop-up" *ngIf="openPopUp">
-  <app-friends></app-friends>
+  <app-friends (close)="onClose($event)" [userName]="userName" (newChat)="onNew($event)"></app-friends>
 </div>
