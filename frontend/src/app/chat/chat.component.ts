@@ -79,23 +79,26 @@ export class ChatComponent implements OnInit {
     this.chatService.sendMessage('unTyping', 'user not typing');
   }
 
-  // select a user to chat
-  // select() {
-  //   this.findChatId(this.userName, this.chatUserList);
-  //   if (this.activeChat != null) {
-  //     this.chatService.sendMessage('createChannel', this.activeChat);
-  //     this.chatService.sendMessage('joinRoom', this.activeChat.convId);
-  //   }
-  // }
+  // new a chat
+  onNew(friends: string[]) {
+    this.openPopUp = false;
+    this.findChatId(this.userName, friends);
+    if (this.activeChat != null) {
+      this.chatService.sendMessage('createChannel', this.activeChat);
+      this.chatService.sendMessage('joinRoom', this.activeChat.convId);
+    }
+  }
 
-  findChatId(username: string, chatUserList: String[]) {
+  findChatId(username: string, chatUserList: string[]) {
+    const value = chatUserList.concat(username).sort();
     this.chatsList.forEach((chat) => {
       chat.names = chat.names.sort();
-      let value = chatUserList.concat(username).sort();
       if (JSON.stringify(chat.names) === JSON.stringify(value))  {
         this.activeChat = chat;
+        return;
       }
     });
+    this.chatsList.concat(new Chat(this.chatsList[this.chatsList.length - 1].convId + 1, value, []));
   }
 
   findChatByConvId(id: number) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-friends',
@@ -7,8 +7,10 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class FriendsComponent implements OnInit {
   @Output() close = new EventEmitter<boolean>();
-  private chatUsernames: String[];
-  private chatUserList: String[];
+  @Output() newChat = new EventEmitter<String []>();
+  @Input() userName: String;
+  private chatUsernames: string[];
+  private chatUserList: string[];
 
   constructor() { }
 
@@ -22,12 +24,16 @@ export class FriendsComponent implements OnInit {
     this.close.emit(true);
   }
 
-  changeChatUser(chatUsername: String) {
+  changeChatUser(chatUsername: string) {
     if (this.chatUserList.includes(chatUsername)) {
       this.chatUserList = this.chatUserList.filter(user => user !== chatUsername);
     } else {
       this.chatUserList.push(chatUsername);
     }
+  }
+
+  select() {
+    this.newChat.emit(this.chatUserList);
   }
 
 }
