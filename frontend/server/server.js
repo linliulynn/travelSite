@@ -33,7 +33,7 @@ io.on('connection', function(socket) {
         if (data.names != null) {
             data.names.forEach((name)=> {
                 console.log(name);
-                socket.broadcast.emit(name, ["joinRoom", data.convId]);
+                socket.broadcast.emit(name, ["joinRoom", data.id]);
             });
         }
     });

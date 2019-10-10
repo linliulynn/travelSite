@@ -3,7 +3,7 @@
     <div class="chat-friend-list">
       <h2 class="friend-list-header">direct message</h2>
       <li *ngFor="let chat of chatsList">
-        <button class="friend-button" (click)="activate(chat)" [ngClass]="{'active': activeChat.convId === chat.convId}">{{chat.names}}</button>
+        <button class="friend-button" (click)="activate(chat)" [ngClass]="{'active': activeChat.id === chat.id}">{{chat.names}}</button>
       </li>
     </div>
     <div class="chat">
@@ -27,7 +27,8 @@
       </div>
     
       <div class="chat-message">
-        <textarea type="text" [(ngModel)]="message" (keyup)="typing()" (blur)="unTyping()"></textarea>
+        <!-- <textarea type="text" [(ngModel)]="message" (keyup)="typing()" (blur)="unTyping()"></textarea> -->
+        <textarea type="text" [(ngModel)]="message"></textarea>
         <button type="button" class="btn btn-la btn-default" (click)="send()">send message</button>
       </div> 
     </div>
@@ -37,24 +38,6 @@
     <input type="text" [(ngModel)]="userName" (blur)="onBlur()">
   </div> 
 </div>
-<!-- <div class="pop-up" *ngIf="openPopUp">
-  <div class="user-list">
-    <div class="user-list-header">
-      <div class="button-group">
-        <button type="button" class="btn btn-la btn-default" (click)="cancel()">Cancel</button>
-        <button type="button" class="btn btn-la btn-default" (click)="select()">Done</button>
-      </div>
-      <p>select friends to chat</p>
-    </div>
-    <div *ngFor="let chatUsername of chatUsernames; let idx = index" class="user-elements">
-      <div class="chat-user-elem" role="button">
-        <input type="radio" id="{{idx}}" [attr.name]="chatUsername" [checked]="chatUserList.includes(chatUsername)" [value]="chatUsername"
-        (click)="changeChatUser(chatUsername)">
-        <label for="{{idx}}">{{chatUsername}}</label>
-      </div>
-    </div>
-  </div>
-</div> -->
 <div class="pop-up" *ngIf="openPopUp">
   <app-friends (close)="onClose($event)" [userName]="userName" (newChat)="onNew($event)"></app-friends>
 </div>

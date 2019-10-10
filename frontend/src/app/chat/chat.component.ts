@@ -18,8 +18,6 @@ export class ChatComponent implements OnInit {
   public messages: Message[] = [];
   typingMessage: String;
   private userName;
-  // private chatUsernames: String[] = [];
-  // private chatUserList: String[];
   private chatsList: Chat[] = [];
   private activeChat;
   private openPopUp: boolean;
@@ -30,9 +28,6 @@ export class ChatComponent implements OnInit {
     // TODO: replace the username define part after testing
     // this.userName = JSON.parse(localStorage.getItem('currentUser')).username || '';
     this.userName = '';
-    // TODO: get friends name from backend, hard coded for convenience right now
-    // this.chatUsernames = ['Mary', 'Bob', 'Jane'];
-    // this.chatUserList = [];
     this.chatService.initSocket();
     this.chatService.getMessage('message').subscribe((data) => {
       this.messages.push(data);
@@ -43,12 +38,20 @@ export class ChatComponent implements OnInit {
     this.chatService.getMessage('unTyping').subscribe((data) => {
       this.typingMessage = '';
     });
+    // TODO: get chats from backend, hard coded for convenience right now
     this.chatsList = [
-      {'convId': 1, 'names': ['Mary', 'Bob', 'Jane'], 'messages': [new Message('Bob', 'hello'), new Message('Mary', 'hello')]},
-      {'convId': 2, 'names': ['Mary', 'Bob'], 'messages': []},
-      {'convId': 3, 'names': ['Mary', 'Jane'], 'messages': []}
+      {'id': 1, 'names': ['Mary', 'Bob', 'Jane'], 'messages': [new Message('Bob', 'hello'), new Message('Mary', 'hello')]},
+      {'id': 2, 'names': ['Mary', 'Bob'], 'messages': []},
+      {'id': 3, 'names': ['Mary', 'Jane'], 'messages': []}
     ];
-    this.activeChat = new Chat(0, [], []);
+    this.activeChat = (this.chatsList.length > 0) ? this.chatsList[0] : null;
+    this.chatsList.forEach((chat) => {
+      this.chatService.initChannel(chat);
+      // this.chatService.getMessage('' + chat.id).subscribe((data) => {
+      //   console.log(data);
+      // });
+    });
+
     // determin if open pop up
     this.openPopUp = false;
   }
@@ -66,7 +69,7 @@ export class ChatComponent implements OnInit {
     let mesData = new Message(this.userName, this.message);
     this.messages.push(mesData);
     this.activeChat.messages.push(mesData);
-    this.chatService.sendMessageToRoom('sendMessageToRoom', [this.activeChat.convId, mesData]);
+    this.chatService.sendMessageToRoom('sendMessageToRoom', [this.activeChat.id, mesData]);
     // this.chatService.sendMessage('message', this.mesData);
     this.message = '';
   }
@@ -82,14 +85,13 @@ export class ChatComponent implements OnInit {
   // new a chat
   onNew(friends: string[]) {
     this.openPopUp = false;
-    this.findChatId(this.userName, friends);
+    this.createChat(this.userName, friends);
     if (this.activeChat != null) {
-      this.chatService.sendMessage('createChannel', this.activeChat);
-      this.chatService.sendMessage('joinRoom', this.activeChat.convId);
+      this.chatService.initChannel(this.activeChat);
     }
   }
 
-  findChatId(username: string, chatUserList: string[]) {
+  createChat(username: string, chatUserList: string[]) {
     const value = chatUserList.concat(username).sort();
     this.chatsList.forEach((chat) => {
       chat.names = chat.names.sort();
@@ -98,12 +100,14 @@ export class ChatComponent implements OnInit {
         return;
       }
     });
-    this.chatsList.concat(new Chat(this.chatsList[this.chatsList.length - 1].convId + 1, value, []));
+    let newChat = new Chat(this.chatsList[this.chatsList.length - 1].id + 1, value, []);
+    this.chatsList.push(newChat);
+    this.activeChat = newChat;
   }
 
   findChatByConvId(id: number) {
     this.chatsList.forEach((chat) => {
-      if (chat.convId === id) {
+      if (chat.id === id) {
         this.activeChat = chat;
       }
     });
@@ -112,14 +116,6 @@ export class ChatComponent implements OnInit {
   activate(chat: Chat) {
     this.activeChat = chat;
   }
-
-  // changeChatUser(chatUsername: String) {
-  //   if (this.chatUserList.includes(chatUsername)) {
-  //     this.chatUserList = this.chatUserList.filter(user => user !== chatUsername);
-  //   } else {
-  //     this.chatUserList.push(chatUsername);
-  //   }
-  // }
 
   // add new chat
   addChat() {
