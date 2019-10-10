@@ -3,15 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { SigninComponent } from './signin/signin.component';
 import { RegisterComponent } from './register/register.component';
-import { JourneyComponent } from './journey/journey.component';
-import { AddJourneyComponent } from './add-journey/add-journey.component';
+import { ChatComponent } from './chat/chat.component';
 
 const appRoutes: Routes = [
-  {path: 'journey', component: JourneyComponent},
-  {path: 'signin', component: SigninComponent},
+  {path: 'chat', component: ChatComponent},
+  {path: 'login', component: SigninComponent},
   {path: 'signup', component: RegisterComponent},
-  {path: 'addJourney', component: AddJourneyComponent},
-  {path: '', redirectTo: '/journey', pathMatch: 'full'}
+  {path: '', redirectTo: '/chat', pathMatch: 'full'}
 ];
 
 @NgModule({
