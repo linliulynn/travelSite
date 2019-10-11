@@ -47,7 +47,7 @@ io.on('connection', function(socket) {
     // sending message to a specific room
     socket.on('sendMessageToRoom', function(data) {
         console.log(data);
-        socket.to(data[0]).emit('message', data[1]);
+        socket.to(data[0]).emit(data[0], data);
     });
 });
 
