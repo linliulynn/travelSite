@@ -47,9 +47,10 @@ export class ChatComponent implements OnInit {
     this.activeChat = (this.chatsList.length > 0) ? this.chatsList[0] : null;
     this.chatsList.forEach((chat) => {
       this.chatService.initChannel(chat);
-      // this.chatService.getMessage('' + chat.id).subscribe((data) => {
-      //   console.log(data);
-      // });
+      this.chatService.getMessage('' + chat.id).subscribe((data) => {
+        console.log(data);
+        this.chatsList.find(item => data[0] === item.id).messages.push(data[1]);
+      });
     });
 
     // determin if open pop up
