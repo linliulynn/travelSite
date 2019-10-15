@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from .models import *
 from rest_framework import serializers
 import json
+from datetime import datetime
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -36,3 +37,20 @@ class JourneySerializer(serializers.ModelSerializer):
         journey.save()
         return journey
 
+# class ChatSerializer(serializers.Serializer):
+#     def create(self, validated_data):
+#         chat = Chat(
+#             created_at = datetime.now()
+#         )
+#         chat.save()
+#         return chat
+
+# class ChatClientSerializer(serializers.Serializer):
+#     def create(self, valiated_data):
+#         chat_id = self.context['chat_id']
+#         chats = ChatClient.objects.create(chat_id=chat_id)
+#         chats.save()
+#         user_id = self.context['user_id']
+#         chats.user_id.add(*user_id)
+#         chats.save()
+#         return chats
