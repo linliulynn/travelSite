@@ -2,14 +2,17 @@ import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { Observable } from 'rxjs';
 import {Chat} from '../models/chat';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class ChatService {
 
   private socket;
   private url = 'http://localhost:4000';
+  private header = new HttpHeaders().set('Content-Type', 'application/json');
+  private addChatUrl = 'http://localhost:8000/chats/';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   initSocket() {
     this.socket = io(this.url);
@@ -37,5 +40,13 @@ export class ChatService {
   initChannel(chat: Chat) {
     this.sendMessage('createChannel', chat);
     this.sendMessage('joinRoom', chat.id);
+  }
+
+  // add chat to database
+  addChat(chat: Chat) {
+    const body = JSON.stringify({
+      user_ids: chat.names
+    });
+    return this.http.post(this.addChatUrl, body, {headers: this.header, });
   }
 }
