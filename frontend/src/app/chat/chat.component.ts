@@ -3,6 +3,7 @@ import { ChatService } from './chat.service';
 import { Message } from '../models/message';
 import { Chat } from '../models/chat';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
 
 @Component({
   selector: 'app-chat',
@@ -104,6 +105,7 @@ export class ChatComponent implements OnInit {
     let newChat = new Chat(this.chatsList[this.chatsList.length - 1].id + 1, value, []);
     this.chatsList.push(newChat);
     this.activeChat = newChat;
+    // this.chatService.addChat(newChat);
   }
 
   findChatByConvId(id: number) {
