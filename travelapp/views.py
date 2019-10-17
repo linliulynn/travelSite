@@ -17,11 +17,11 @@ def index(request):
 
 class UserList(generics.ListCreateAPIView):
     queryset=User.objects.all()   
-    serializer_class= UserSerializer     
+    serializer_class=UserSerializer 
 
 class LoginView(generics.GenericAPIView):
     queryset=User.objects.all()   
-    serializer_class= UserSerializer
+    serializer_class=UserSerializer
 
     def post(self, request, format=None):
         data =json.loads(request.body.decode('utf-8'))
@@ -65,3 +65,25 @@ class JourneyList(generics.ListCreateAPIView):
     #         serializer.save()
     #         return Response(serializer.data, status=status.HTTP_201_CREATED)
     #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# class ChatList(APIView):
+#     def post(self, request, format=None):
+#         data = json.loads(request.body.decode('utf-8'))
+#         chat_serializer = ChatSerializer(data=request.data)
+#         chat = chat_serializer.save()
+#         context = {'chat_id': chat.id}
+#         users = []
+#         for name : request.data['user_ids']
+#             users.append(User.objects.get(username=name)['id'])
+#             chatclient_serializer = ChatClientSerializer()
+        
+class FriendList(APIView):
+    def post(self, request, format=None):
+        data = json.loads(request.body.decode('utf-8'))
+        friend_serializer = FriendSerializer(data=request.data)
+        friend_serializer.save()
+
+    def get(self, request, format=None):
+        friends = [User.objects.get(pk=friend.friend_id) for friend in Friend.objects.all().filter(user_id=request.data.user_id)]
+        return Response(friends)
+

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChatService } from './chat.service';
 import { Message } from '../models/message';
 import { Chat } from '../models/chat';
+import { AlertService } from '../alert/alert.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
 
@@ -13,7 +14,6 @@ import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
 export class ChatComponent implements OnInit {
 
   // TODO: html template modification
-  // TODO: messages design change, not only one list, there is a list for each conversation
 
   private message;
   public messages: Message[] = [];
@@ -23,7 +23,8 @@ export class ChatComponent implements OnInit {
   private activeChat;
   private openPopUp: boolean;
 
-  constructor(private chatService: ChatService) { }
+  constructor(private chatService: ChatService,
+              private alertService: AlertService) { }
 
   ngOnInit() {
     // TODO: replace the username define part after testing
@@ -93,6 +94,7 @@ export class ChatComponent implements OnInit {
     }
   }
 
+  // display chat if chat exists or create a new chat if chat not exists
   createChat(username: string, chatUserList: string[]) {
     const value = chatUserList.concat(username).sort();
     this.chatsList.forEach((chat) => {
@@ -103,9 +105,16 @@ export class ChatComponent implements OnInit {
       }
     });
     let newChat = new Chat(this.chatsList[this.chatsList.length - 1].id + 1, value, []);
-    this.chatsList.push(newChat);
-    this.activeChat = newChat;
-    // this.chatService.addChat(newChat);
+      this.chatsList.push(newChat);
+      this.activeChat = newChat;
+    // this.chatService.addChat(value).subscribe(
+    //   data => {
+    //     console.log(data);
+    //   },
+    //   error => {
+    //     this.alertService.error('add chat failed');
+    //   }
+    // );
   }
 
   findChatByConvId(id: number) {

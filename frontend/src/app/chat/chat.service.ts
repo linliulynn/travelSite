@@ -43,9 +43,9 @@ export class ChatService {
   }
 
   // add chat to database
-  addChat(chat: Chat) {
+  addChat(user_ids: String[]) {
     const body = JSON.stringify({
-      user_ids: chat.names
+      user_ids: user_ids
     });
     return this.http.post(this.addChatUrl, body, {headers: this.header, });
   }
