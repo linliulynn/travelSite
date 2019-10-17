@@ -24,3 +24,7 @@ class Journey(models.Model):
 
 # class Chat(models.Model):
 #     created_at = models.DateTimeField()
+
+class ChatClient(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    friend_id = models.ForeignKey(User, on_delete=models.CASCADE)
