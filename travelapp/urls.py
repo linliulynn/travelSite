@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^users/$', UserList.as_view()),
     url(r'^users/login/$', LoginView.as_view()),
     url(r'^journeys/$',JourneyList.as_view()),
-    url(r'^friends/$', FriendList.as_view()),
+    url(r'^friends/$', views.FriendListViewSet.as_view({'get': 'list'})),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
