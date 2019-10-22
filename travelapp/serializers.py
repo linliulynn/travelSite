@@ -40,8 +40,8 @@ class JourneySerializer(serializers.ModelSerializer):
 class FriendSerializer(serializers.Serializer):
     def creat(self, validated_data):
         friend = Friend(
-            user_id: validated_data['user_id']
-            friend_id: validated_data['friend_id']
+            user_id = validated_data['user_id'],
+            friend_id = validated_data['friend_id']
         )
         friend.save()
         return friend

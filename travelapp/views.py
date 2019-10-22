@@ -5,6 +5,7 @@ from rest_framework import status , generics , mixins , viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
+from rest_framework.views import APIView
 
 from django.core.files.base import ContentFile
 from django.contrib.auth.models import User 
