@@ -37,9 +37,14 @@ class JourneySerializer(serializers.ModelSerializer):
         journey.save()
         return journey
 
-class FriendSerializer(serializers.Serializer):
+class FriendSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    class Meta:
+        model = ChatClient
+        fields = ('user_id', 'friend')
+
     def creat(self, validated_data):
-        friend = Friend(
+        friend = ChatClient(
             user_id = validated_data['user_id'],
             friend_id = validated_data['friend_id']
         )
