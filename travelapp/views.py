@@ -2,9 +2,8 @@ import base64
 import json
 from django.http import HttpResponse
 from rest_framework import status , generics , mixins , viewsets
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, detail_route
 from rest_framework.response import Response
-from rest_framework.decorators import detail_route
 from rest_framework.views import APIView
 
 from django.core.files.base import ContentFile
@@ -79,16 +78,17 @@ class JourneyList(generics.ListCreateAPIView):
 #             chatclient_serializer = ChatClientSerializer()
         
 class FriendList(APIView):
+
     def post(self, request, format=None):
         data = json.loads(request.body.decode('utf-8'))
         friend_serializer = FriendSerializer(data=request.data)
         friend_serializer.save()
 
-    def get(self, request, format=None):
-        friends = [User.objects.get(pk=friend.friend_id) for friend in ChatClient.objects.all().filter(user_id=request.data.user_id)]
-        return Response(friends)
+    # def retrieve_friends(self, request, format=None):
+    #     queryset = ChatClient.objects.all(user_id=request.data['user_id'])
+    #     serializer = FriendSerializer(queryset, many=True)
+    #     return Response(serializer.data)
 
-class FriendListViewSet(viewsets.ViewSet): 
-    def list(self, request, format=None):
+    def get(self, request, format=None):
         friends = ChatClient.objects.all()
         return Response(friends)
