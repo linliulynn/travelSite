@@ -38,10 +38,14 @@ class JourneySerializer(serializers.ModelSerializer):
         return journey
 
 class FriendSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    friend = serializers.HyperlinkedRelatedField(
+        view_name='user-detail',
+        lookup_field='friend_id',
+        many=True
+    )
     class Meta:
         model = ChatClient
-        fields = ('user_id', 'friend')
+        fields = ['user_id', 'friend']
 
     def creat(self, validated_data):
         friend = ChatClient(
