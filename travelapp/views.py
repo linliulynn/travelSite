@@ -84,10 +84,10 @@ class FriendList(APIView):
         friend_serializer = FriendSerializer(data=request.data)
         friend_serializer.save()
 
-    # def retrieve_friends(self, request, format=None):
-    #     queryset = ChatClient.objects.all(user_id=request.data['user_id'])
-    #     serializer = FriendSerializer(queryset, many=True)
-    #     return Response(serializer.data)
+    def retrieve_friends(self, request, format=None):
+        queryset = ChatClient.objects.all(user_id=request.data['user_id'])
+        serializer = FriendSerializer(queryset, many=True)
+        return Response(serializer.data)
 
     def get(self, request, format=None):
         friends = ChatClient.objects.all()
