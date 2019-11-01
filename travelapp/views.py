@@ -87,12 +87,19 @@ class FriendList(APIView):
             return Response(friend_serializer.data, status=status.HTTP_201_CREATED)
         return Response(friend_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def retrieve_friends(self, request, format=None):
-        queryset = ChatClient.objects.all(user_id=request.data['user_id'])
-        print(request.data)
-        serializer = FriendDetailSerializer(queryset)
-        return Response(serializer.data)
+    # def retrieve_friends(self, request, format=None):
+    #     queryset = ChatClient.objects.filter(user_id=request.data['user_id'])
+    #     print(request.data)
+    #     serializer = FriendDetailSerializer(queryset, context={'request': request})
+    #     return Response(serializer.data)
 
     def get(self, request, format=None):
         friends = ChatClient.objects.all()
         return Response(friends)
+
+# class FriendDetail(APIView):
+
+#     def get(self, request, format=None):
+#         queryset = ChatClient.objects.all(user_id=request.data['user_id'])
+#         serializer = FriendDetailSerializer(queryset, many=True)
+#         return Response(serializer.data)
