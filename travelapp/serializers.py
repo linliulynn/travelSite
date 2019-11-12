@@ -50,19 +50,11 @@ class FriendSerializer(serializers.ModelSerializer):
         friend.save()
         return friend
 
-# class FriendDetailSerializer(serializers.HyperlinkedModelSerializer):
-#     friend = serializers.HyperlinkedRelatedField(
-#         view_name='users',
-#         lookup_field='friend_id',
-#         many=True,
-#         read_only=True
-#     )
-#     class Meta:
-#         model = ChatClient
-#         fields = ['user_id', 'friend']
-        # extra_kwargs = {
-        #     'url': {'view_name': 'friends', 'lookup_field': 'user_id'}
-        # }
+class FriendDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChatClient
+        fields = ['user_id', 'friend_id']
+        depth = 1
 
 # class ChatSerializer(serializers.Serializer):
 #     def create(self, validated_data):
