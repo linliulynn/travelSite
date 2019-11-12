@@ -111,5 +111,6 @@ class FriendDetail(APIView):
         id = request.path.split('/')[-2]
         print(id)
         queryset = self.get_object(id)
-        serializer = FriendSerializer(queryset, many=True)
+        serializer = FriendDetailSerializer(queryset, context={'request': request}, many=True)
+        print(serializer.data)
         return Response(serializer.data)
