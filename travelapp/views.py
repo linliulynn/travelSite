@@ -100,17 +100,9 @@ class FriendList(APIView):
 
 class FriendDetail(APIView):
 
-    def get_object(self, id):
-        print(id)
-        try:
-            return ChatClient.objects.filter(user_id = id)
-        except ChatClient.DoseNotExist:
-            raise Http404
-
     def get(self, request, format=None):
         id = request.path.split('/')[-2]
-        print(id)
-        queryset = self.get_object(id)
+        queryset = User.objects.filter(id = id)
         serializer = FriendDetailSerializer(queryset, context={'request': request}, many=True)
         print(serializer.data)
         return Response(serializer.data)
