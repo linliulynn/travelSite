@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { FriendService } from './friend-service.service';
 
 @Component({
   selector: 'app-friends',
@@ -12,12 +13,13 @@ export class FriendsComponent implements OnInit {
   private chatUsernames: string[];
   private chatUserList: string[];
 
-  constructor() { }
+  constructor(private friendService: FriendService) { }
 
   ngOnInit() {
     // TODO: get friends name from backend, hard coded for convenience right now
     this.chatUsernames = ['Mary', 'Bob', 'Jane'];
     this.chatUserList = [];
+    this.getFriends();
   }
 
   cancel() {
@@ -34,6 +36,12 @@ export class FriendsComponent implements OnInit {
 
   select() {
     this.newChat.emit(this.chatUserList);
+  }
+
+  getFriends() {
+    this.friendService.getFriend().subscribe(data => {
+      console.log(data);
+    });
   }
 
 }

@@ -22,6 +22,7 @@ import { LogoutService } from './shared/logout.service';
 import { ChatComponent } from './chat/chat.component';
 import { ChatService } from './chat/chat.service';
 import { FriendsComponent } from './friends/friends.component';
+import { FriendService } from './friends/friend-service.service';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { FriendsComponent } from './friends/friends.component';
     AddJourneyService,
     RegisterService,
     LogoutService,
-    ChatService],
+    ChatService,
+    FriendService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

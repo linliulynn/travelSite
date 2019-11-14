@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FriendServiceService } from './friend-service.service';
+import { FriendService } from './friend-service.service';
 
-describe('FriendServiceService', () => {
+describe('FriendService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: FriendServiceService = TestBed.get(FriendServiceService);
+    const service: FriendService = TestBed.get(FriendService);
     expect(service).toBeTruthy();
   });
 });
