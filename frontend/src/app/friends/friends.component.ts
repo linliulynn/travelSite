@@ -16,10 +16,9 @@ export class FriendsComponent implements OnInit {
   constructor(private friendService: FriendService) { }
 
   ngOnInit() {
-    // TODO: get friends name from backend, hard coded for convenience right now
-    this.chatUsernames = ['Mary', 'Bob', 'Jane'];
-    this.chatUserList = [];
+    this.chatUsernames = [];
     this.getFriends();
+    this.chatUserList = [];
   }
 
   cancel() {
@@ -40,8 +39,11 @@ export class FriendsComponent implements OnInit {
 
   getFriends() {
     this.friendService.getFriend().subscribe(data => {
-      console.log(data);
+      data[0].user_set.forEach(user => {
+        this.chatUsernames.push(user.friend_id.username);
+      });
     });
+    console.log(this.chatUsernames);
   }
 
 }
