@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class FriendService {
-  private getFriendUrl = 'http://localhost:8000/travel/friends/1/';
+  private getFriendUrl = 'http://localhost:8000/travel/friends/15/';
 
   constructor(private http: HttpClient) { }
 
