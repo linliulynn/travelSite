@@ -37,13 +37,13 @@ export class FriendsComponent implements OnInit {
     this.newChat.emit(this.chatUserList);
   }
 
+  // get friends' name from backend
   getFriends() {
     this.friendService.getFriend().subscribe(data => {
       data[0].user_set.forEach(user => {
         this.chatUsernames.push(user.friend_id.username);
       });
     });
-    console.log(this.chatUsernames);
   }
 
 }
