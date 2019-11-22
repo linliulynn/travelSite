@@ -18,12 +18,12 @@ class Journey(models.Model):
     description = models.CharField(max_length=100)
     owner = models.ForeignKey(User,on_delete=models.CASCADE)
 
-# class ChatClient(models.Model):
-#     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-#     chat_id = models.ForeignKey(Chat, on_delete=models.CASCADE)
+class ChatUsers(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chat_set')
+    chat_id = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='user_set')
 
-# class Chat(models.Model):
-#     created_at = models.DateTimeField()
+class Chat(models.Model):
+    created_at = models.DateTimeField()
 
 class ChatClient(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_set')
