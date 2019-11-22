@@ -76,7 +76,7 @@ class FriendDetailSerializer(serializers.ModelSerializer):
 #         chat.save()
 #         return chat
 
-# class ChatClientSerializer(serializers.Serializer):
+# class ChatUsersSerializer(serializers.Serializer):
 #     def create(self, valiated_data):
 #         chat_id = self.context['chat_id']
 #         chats = ChatClient.objects.create(chat_id=chat_id)
