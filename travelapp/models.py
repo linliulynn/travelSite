@@ -17,13 +17,19 @@ class Journey(models.Model):
     longitude = models.DecimalField(max_digits=9, decimal_places=6)
     description = models.CharField(max_length=100)
     owner = models.ForeignKey(User,on_delete=models.CASCADE)
+    
+class Chat(models.Model):
+    created_at = models.DateTimeField()
 
 class ChatUsers(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chat_set')
     chat_id = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='user_set')
 
-class Chat(models.Model):
+class Message(models.Model):
+    chat_id = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='chat_set')
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='message_set')
     created_at = models.DateTimeField()
+    content = models.TextField()
 
 class ChatClient(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_set')
