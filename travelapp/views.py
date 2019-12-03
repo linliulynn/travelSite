@@ -70,12 +70,18 @@ class ChatList(APIView):
     def post(self, request, format=None):
         data = json.loads(request.body.decode('utf-8'))
         chat_serializer = ChatSerializer(data=request.data)
-        chat = chat_serializer.save()
-        context = {'chat_id': chat.id}
-        users = []
-        for name in request.data['user_ids']:
-            users.append(User.objects.get(username=name)['id'])
-            chatUsers_serializer = ChatUsersSerializer()
+        if chat_serializer.is_valid():
+            chat = chat_serializer.save()
+        for name in request.data['user_names']:
+            user_id = User.objects.filter(username=name).values('id')[0]['id']
+            params = {'user_id': user_id, 'chat_id': chat.id}
+            print(params)
+            chatUsers_serializer = ChatUsersSerializer(data=json.loads(json.dumps(params)))
+            if chatUsers_serializer.is_valid():
+                chatUsers = chatUsers_serializer.save()
+            else:
+                return Response(chatUsers_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response("success", status=status.HTTP_201_CREATED)
     
     def get(self, request, format=None):
         chatusers = ChatUsers.objects.all()
