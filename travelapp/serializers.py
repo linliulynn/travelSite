@@ -3,6 +3,7 @@ from .models import *
 from rest_framework import serializers
 import json
 from datetime import datetime
+from django.utils import timezone
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -71,7 +72,7 @@ class FriendDetailSerializer(serializers.ModelSerializer):
 class ChatSerializer(serializers.Serializer):
     def create(self, validated_data):
         chat = Chat(
-            created_at = datetime.now()
+            created_at = timezone.now()
         )
         chat.save()
         return chat
@@ -82,6 +83,7 @@ class ChatUsersSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, valiated_data):
+        print(valiated_data['user_id'])
         chatuser = ChatUsers(
             user_id = validated_data['user_id'],
             chat_id = validated_data['chat_id']
