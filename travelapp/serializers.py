@@ -80,13 +80,14 @@ class ChatSerializer(serializers.Serializer):
 class ChatUsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = ChatUsers
-        fields = '__all__'
+        fields = ['user_id', 'chat_id']
 
     def create(self, valiated_data):
-        print(valiated_data['user_id'])
+        user_id = valiated_data['user_id']
+        chat_id = valiated_data['chat_id']
         chatuser = ChatUsers(
-            user_id = validated_data['user_id'],
-            chat_id = validated_data['chat_id']
+            user_id_id = user_id,
+            chat_id_id = chat_id
         )
         chatuser.save()
         return chatuser
