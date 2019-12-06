@@ -67,6 +67,8 @@ class JourneyList(generics.ListCreateAPIView):
     #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ChatList(APIView):
+    # this is for create a new chat with a list of usernames
+    # post format {"user_names": ["usernameA", "usernameB", "usernameC"]}
     def post(self, request, format=None):
         data = json.loads(request.body.decode('utf-8'))
         chat_serializer = ChatSerializer(data=request.data)
