@@ -70,6 +70,7 @@ class FriendDetailSerializer(serializers.ModelSerializer):
         fields = ['id', 'user_set']
 
 class ChatSerializer(serializers.Serializer):
+    # init a new chat
     def create(self, validated_data):
         chat = Chat(
             created_at = timezone.now()
@@ -82,6 +83,7 @@ class ChatUsersSerializer(serializers.ModelSerializer):
         model = ChatUsers
         fields = ['user_id', 'chat_id']
 
+    # create chat_id and user_id relationship
     def create(self, valiated_data):
         user_id = valiated_data['user_id']
         chat_id = valiated_data['chat_id']
