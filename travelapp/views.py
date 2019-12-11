@@ -111,3 +111,10 @@ class FriendDetail(APIView):
         queryset = User.objects.filter(id = id)
         serializer = FriendDetailSerializer(queryset, context={'request': request}, many=True)
         return Response(serializer.data)
+
+class UserChats(APIView):
+    def get(self, request, format=None):
+        id = request.path.split('/')[-2]
+        queryset = User.objects.filter(id = id)
+        serializer = UserChatsSerializer(queryset, context={'request': request}, many=True)
+        return Response(serializer.data)

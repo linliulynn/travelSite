@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^friends/$', FriendList.as_view()),
     url(r'friends/[0-9]+/$', FriendDetail.as_view()),
     url(r'^chats/$', ChatList.as_view()),
+    url(r'userchats/[0-9]+/$', UserChats.as_view()),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 

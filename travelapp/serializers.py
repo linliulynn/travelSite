@@ -51,6 +51,8 @@ class FriendSerializer(serializers.ModelSerializer):
         friend.save()
         return friend
 
+# UsernameSerializer, FriendRetrieveSerializer and FriendDetailSerializer together
+# for retriving a user's friends' name
 class UserNameSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -69,7 +71,10 @@ class FriendDetailSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'user_set']
 
-class ChatSerializer(serializers.Serializer):
+class ChatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chat
+        fields = __all__
     # init a new chat
     def create(self, validated_data):
         chat = Chat(
@@ -93,3 +98,17 @@ class ChatUsersSerializer(serializers.ModelSerializer):
         )
         chatuser.save()
         return chatuser
+
+class ChatRetrieveSerializer(serializers.ModelSerializer):
+    chat = ChatSerializer(many=False, read_only=True)
+    class Meta:
+        model = ChatUsers
+        fields = ['user_id', 'chat']
+
+# serializer a user's all chats
+class UserChatsSerializer(serializer.ModelSerializer):
+    chat_set = ChatRetrieveSerializer(many=False, read_only=True)
+    class Meta:
+        model = User
+        fields =['id', 'chat_set']
+    
