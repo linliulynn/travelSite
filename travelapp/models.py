@@ -22,8 +22,8 @@ class Chat(models.Model):
     created_at = models.DateTimeField()
 
 class ChatUsers(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chat_set')
-    chat_id = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='user_set')
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chatuser_set')
+    chat_id = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='chat_set')
 
 class Message(models.Model):
     chat_id = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='chat_set')
