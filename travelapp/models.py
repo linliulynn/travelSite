@@ -21,9 +21,11 @@ class Journey(models.Model):
 class Chat(models.Model):
     created_at = models.DateTimeField()
 
+# userchat_set relates to get chats for a user
+# chatuser_set relates to get users for a chat
 class ChatUsers(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chatuser_set')
-    chat_id = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='chat_set')
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='userchat_set')
+    chat_id = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='chatuser_set')
 
 class Message(models.Model):
     chat_id = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='chat_set')
